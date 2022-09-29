@@ -1,8 +1,9 @@
 import './article.less'
+
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
+export const data = [
   {
     title: 'BloomTech Students: "We\'re the best!"',
     date: 'Nov 5th, 2018',
@@ -89,6 +90,59 @@ const data = [
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
+
+
+function articleMaker(articleObj) {
+  //create the items needed//
+let articleDiv = document.createElement('div')
+let articleTitle = document.createElement('h2')
+let articleDate = document.createElement('p')
+let articleCont = document.createElement('p')
+let articleCont2 = document.createElement('p')
+let articleCont3 = document.createElement('p')
+let articleSpan = document.createElement('span')
+
+  //Add classes
+articleDiv.classList.add('article')
+articleDate.classList.add('date')
+articleSpan.classList.add('expandButton')
+
+//append everything to the div
+articleDiv.appendChild(articleTitle)
+articleDiv.appendChild(articleDate)
+articleDiv.appendChild(articleCont)
+articleDiv.appendChild(articleCont2)
+articleDiv.appendChild(articleCont3)
+articleDiv.appendChild(articleSpan)
+
+
+  //add  event listener
+  articleSpan.addEventListener("click", (evt) => {
+
+  articleDiv.classList.toggle('article-open')
+})
+
+articleTitle.textContent = articleObj.title
+articleDate.textContent = articleObj.date
+articleCont.textContent = articleObj.firstParagraph
+articleCont3.textContent = articleObj.thirdParagraph
+articleCont2.textContent = articleObj.secondParagraph
+articleSpan.textContent = "+"
+
+
+console.log(articleDiv)
+return articleDiv
+
+
+  
+};
+
+data.forEach(article => { 
+  document.querySelector('div.articles').appendChild(articleMaker(article))
+})
+
+
+
 
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
